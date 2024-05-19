@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="9720cdd2-4d7b-46c7-9b09-651581b3c524" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="project2Flow" doc:id="20d5e05a-3909-4b3d-af4e-ce23b8f6417c" >
+		<http:listener doc:name="Listener" doc:id="9537af44-8fc7-4d8f-9968-205725ab0038" config-ref="HTTP_Listener_config" path="/kk"/>
+		<logger level="INFO" doc:name="Logger" doc:id="c045c9ca-3abe-4120-b20f-45bcad0adb79" message='#["kk"]'/>
+	</flow>
+</mule>
