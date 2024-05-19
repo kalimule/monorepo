@@ -10,6 +10,10 @@ on:
     paths:
       -project1/**
   workflow_dispatch:
+defaults:
+  run:
+   working-directory: project1
+  
     
 jobs:
   test:
