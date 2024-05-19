@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 defaults:
   run:
-   working-directory: project1
+   working-directory: ./project1
   
     
 jobs:
@@ -24,7 +24,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('./project1/**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
     - name: Set up JDK 1.8
@@ -37,7 +37,7 @@ jobs:
         nexus_username: ${{ secrets.nexus_username }}
         nexus_password: ${{ secrets.nexus_password }}
         KEY: ${{ secrets.decryption_key }}
-      run: mvn test --settings .maven/settings.xml -Dsecure.key="$KEY"
+      run: mvn test --settings ./project1/.maven/settings.xml -Dsecure.key="$KEY"
     - name: Upload MUnit reports
       uses: actions/upload-artifact@v4
       with:
@@ -54,7 +54,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('./project1/**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
     - name: Set up JDK 1.8
@@ -70,12 +70,12 @@ jobs:
         SECRET: ${{ secrets.CONNECTED_APP_CLIENT_SECRET }}
         KEY: ${{ secrets.decryption_key }}
       run: |
-        mvn deploy --settings .maven/settings.xml -DskipMunitTests \
+        mvn deploy --settings ./project1/.maven/settings.xml -DskipMunitTests \
           -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
           -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
           
     - name: Build with Maven
-      run: mvn clean -B package --file pom.xml -s .maven/settings.xml -DskipMunitTests
+      run: mvn clean -B package --file ./project1/pom.xml -s ./project1.maven/settings.xml -DskipMunitTests
     - name: Stamp artifact file name with commit hash
       run: |
         artifactName1=$(ls target/*.jar | head -1)
@@ -98,7 +98,7 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('./project1/**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
     - uses: actions/download-artifact@v4
