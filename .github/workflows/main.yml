@@ -17,5 +17,5 @@ jobs:
   workflow:
     # Make sure to add the right path to the reusable workflow.
     # {organization}/{repository}/.github/workflows/{workflow_file_name}.yml@{branch}
-    uses: ./.github/workflows/project1.yml@master
+    uses: .github/workflows/project1.yml@main
     secrets: inherit
