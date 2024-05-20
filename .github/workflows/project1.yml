@@ -77,7 +77,7 @@ jobs:
     #       -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
           
     - name: Build with Maven
-      run: mvn clean -B package --file pom.xml -s .maven/settings.xml -DskipMunitTests
+      run: mvn clean -B package --file pom.xml /home/runner/work/monorepo/monorepo/.maven/settings.xml -DskipMunitTests
     - name: Stamp artifact file name with commit hash
       run: |
         artifactName1=$(ls target/*.jar | head -1)
@@ -116,7 +116,7 @@ jobs:
         KEY: ${{ secrets.decryption_key }}
       run: |
         artifactName=$(ls *.jar | head -1)
-        mvn -e -X clean deploy --settings .maven/settings.xml -DskipMunitTests -DmuleDeploy \
+        mvn -e -X clean deploy --settings /home/runner/work/monorepo/monorepo/.maven/settings.xml -DskipMunitTests -DmuleDeploy \
          -Dmule.artifact=$artifactName \
          -Dclient.id="$ID" \
          -Dclient.secret="$SECRET" \
