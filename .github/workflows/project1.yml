@@ -77,7 +77,7 @@ jobs:
     #       -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
           
     - name: Build with Maven
-      run: mvn clean -B package --file pom.xml /home/runner/work/monorepo/monorepo/.maven/settings.xml -DskipMunitTests
+      run: mvn clean -B package --file pom.xml -s /home/runner/work/monorepo/monorepo/.maven/settings.xml -DskipMunitTests
     - name: Stamp artifact file name with commit hash
       run: |
         artifactName1=$(ls target/*.jar | head -1)
