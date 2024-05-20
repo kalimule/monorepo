@@ -12,11 +12,13 @@ on:
 defaults:
   run:
    working-directory: ./project2
+   
   
     
 jobs:
   test:
     runs-on: ubuntu-latest
+    environment: Stage
     steps:
     - name: Checkout this repo
       uses: actions/checkout@v4
