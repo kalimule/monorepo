@@ -1,3 +1,4 @@
+
 name: build and deploy project2
 on:
   push:
@@ -72,12 +73,12 @@ jobs:
     #     SECRET: ${{ secrets.CONNECTED_APP_CLIENT_SECRET }}
     #     KEY: ${{ secrets.decryption_key }}
     #   run: |
-    #     mvn deploy --settings .maven/settings.xml -DskipMunitTests \
+    #     mvn clean deploy --settings .maven/settings.xml -DskipMunitTests \
     #       -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
     #       -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
           
     - name: Build with Maven
-      run: mvn clean -B package --file pom.xml -s /home/runner/work/monorepo/monorepo/.maven/settings.xml -DskipMunitTests
+      run: mvn -e -X clean -B package --file pom.xml -s /home/runner/work/monorepo/monorepo/.maven/settings.xml -DskipMunitTests
     - name: Stamp artifact file name with commit hash
       run: |
         artifactName1=$(ls target/*.jar | head -1)
