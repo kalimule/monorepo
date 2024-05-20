@@ -1,0 +1,21 @@
+# This is a parent workflow 
+# It will trigger the reusable workflow and pass the input parameters to it
+
+name: Build, Test and Deploy to DEV
+
+on:
+  # Triggers the workflow on push
+  push:
+    branches:
+      - main
+
+  # Allows you to run this workflow manually from the Actions tab with input parameters
+  workflow_dispatch:
+    
+
+jobs:
+  workflow:
+    # Make sure to add the right path to the reusable workflow.
+    # {organization}/{repository}/.github/workflows/{workflow_file_name}.yml@{branch}
+    uses: ./.github/workflows/project1.yml@master
+    secrets: inherit
