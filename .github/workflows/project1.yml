@@ -39,7 +39,7 @@ jobs:
         nexus_username: ${{ secrets.nexus_username }}
         nexus_password: ${{ secrets.nexus_password }}
         KEY: ${{ secrets.decryption_key }}
-      run: mvn clean test --settings -s settings.xml -Dsecure.key="$KEY"
+      run: mvn clean test --settings -s .maven/settings.xml -Dsecure.key="$KEY"
     - name: Upload MUnit reports
       uses: actions/upload-artifact@v4
       with:
@@ -72,12 +72,12 @@ jobs:
     #     SECRET: ${{ secrets.CONNECTED_APP_CLIENT_SECRET }}
     #     KEY: ${{ secrets.decryption_key }}
     #   run: |
-    #     mvn deploy --settings ./project1/.maven/settings.xml -DskipMunitTests \
+    #     mvn deploy --settings .maven/settings.xml -DskipMunitTests \
     #       -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" \
     #       -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
           
     - name: Build with Maven
-      run: mvn clean -B package --file pom.xml -s --file settings.xml -DskipMunitTests
+      run: mvn clean -B package --file pom.xml -s .maven/settings.xml -DskipMunitTests
     - name: Stamp artifact file name with commit hash
       run: |
         artifactName1=$(ls target/*.jar | head -1)
