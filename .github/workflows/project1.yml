@@ -39,7 +39,7 @@ jobs:
         nexus_username: ${{ secrets.nexus_username }}
         nexus_password: ${{ secrets.nexus_password }}
         KEY: ${{ secrets.decryption_key }}
-      run: mvn clean test --settings .maven/settings.xml -Dsecure.key="$KEY"
+      run: mvn clean test --settings /home/runner/work/monorepo/monorepo/.maven/settings.xml -Dsecure.key="$KEY"
     - name: Upload MUnit reports
       uses: actions/upload-artifact@v4
       with:
